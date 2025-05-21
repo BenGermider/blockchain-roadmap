@@ -1,6 +1,10 @@
 import asyncio
+
 from datetime import datetime
 from hashlib import sha256
+
+from utils import timer
+
 
 class Block:
 
@@ -33,12 +37,12 @@ class Block:
         """
         return self._hash
 
+
     async def mine_block(self, difficulty):
         prefix = "0" * difficulty
         while not self._hash.startswith(prefix):
             self._nonce += 1
             self._hash = self._calculate_hash()
-            print(f"Mining... Nonce: {self._nonce}, Hash: {self._hash}")
             if self._nonce % 1000 == 0:
                 await asyncio.sleep(0)
         print(f"Block mined: {self._hash}")

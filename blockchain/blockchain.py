@@ -1,3 +1,4 @@
+from utils import timer
 from .block import Block
 
 class Blockchain:
@@ -12,11 +13,12 @@ class Blockchain:
         """
         return Block("Genesis Block", "0" * 64)
 
+    @timer
     async def add_block(self, data) -> None:
         """
         Add a new block to the blockchain.
         """
         previous_block = self.chain[-1]
         new_block = Block(data, previous_block.hash)
-        await new_block.mine_block(1)  # Example difficulty
+        await new_block.mine_block(5)  # Example difficulty
         self.chain.append(new_block)
