@@ -8,15 +8,15 @@ class Block:
         self._data = data
         self._previous_hash = previous_hash
         self._timestamp = datetime.now()
-        self._hash = self._calculate_hash()
         self._nonce = 0
+        self._hash = self._calculate_hash()
 
 
     def _calculate_hash(self):
         """
         Calculate the hash of the block using SHA-256.
         """
-        block_string = f"{self._data}{self._previous_hash}{self._timestamp}"
+        block_string = f"{self._data}{self._previous_hash}{self._timestamp}{self._nonce}"
         return sha256(block_string.encode()).hexdigest()
 
     @property
@@ -38,6 +38,7 @@ class Block:
         while not self._hash.startswith(prefix):
             self._nonce += 1
             self._hash = self._calculate_hash()
+            print(f"Mining... Nonce: {self._nonce}, Hash: {self._hash}")
             if self._nonce % 1000 == 0:
                 await asyncio.sleep(0)
         print(f"Block mined: {self._hash}")

@@ -1,4 +1,4 @@
-from block import Block
+from .block import Block
 
 class Blockchain:
 
@@ -18,5 +18,5 @@ class Blockchain:
         """
         previous_block = self.chain[-1]
         new_block = Block(data, previous_block.hash)
-        await new_block.mine_block(4)  # Example difficulty
+        await new_block.mine_block(1)  # Example difficulty
         self.chain.append(new_block)
