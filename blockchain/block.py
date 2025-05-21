@@ -6,8 +6,8 @@ class Block:
     def __init__(self, data, previous_hash):
         self._data = data
         self._previous_hash = previous_hash
-        self._hash = self._calculate_hash()
         self._timestamp = datetime.now()
+        self._hash = self._calculate_hash()
 
     def _calculate_hash(self):
         """
@@ -24,8 +24,8 @@ class Block:
         return self._data
 
     @property
-    def previous_hash(self):
+    def hash(self):
         """
         Get the previous hash of the block.
         """
-        return self._previous_hash
+        return self._hash
